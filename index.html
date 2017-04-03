@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Table</title>
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="scorecard.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+</head>
+<body>
+<div class="alignment">
+    <h1 id="golfheader">Golf Course Score Card</h1>
+    <h2 id="getCourse" >Choose Your Location</h2>
+    <label>Golf Course:<select id="courseSelect" onchange="getcourseJSON(value)">
+        <option>Course Select</option>
+        <option value="https://golf-courses-api.herokuapp.com/courses/11819">Thanksgiving Point</option>
+        <option value="https://golf-courses-api.herokuapp.com/courses/12993">South Mountain Golf Club</option>
+        <option value="https://golf-courses-api.herokuapp.com/courses/49557">The Ranches Golf Club</option>
+        <option value="https://golf-courses-api.herokuapp.com/courses/18300">Fox Hollow Golf Club</option>
+        <option value="https://golf-courses-api.herokuapp.com/courses/49290">Alpine Country Club</option>
+        <option value="https://golf-courses-api.herokuapp.com/courses/18300">Fox Hollow</option>
+        <option value="https://golf-courses-api.herokuapp.com/courses/32660">Riverbend Golf Course</option>
+        <option value="https://golf-courses-api.herokuapp.com/courses/18438">Riverside Country Club</option>
+        <option value="https://golf-courses-api.herokuapp.com/courses/37542">Cedar Hills Golf Club</option>
+        <option value="https://golf-courses-api.herokuapp.com/courses/19774">Links At Sleepy Ridge</option>
+        <option value="https://golf-courses-api.herokuapp.com/courses/40359">Talons Cove</option>
+        <option value="https://golf-courses-api.herokuapp.com/courses/49557">The Ranches</option>
+        <option value="https://golf-courses-api.herokuapp.com/courses/12993">South Mountain Golf Club</option>
+
+
+    </select></label>
+    <label>Holes:<select class="holeAmount" onchange="showHoleAmount(value)">
+        <option value="allHoles">18</option>
+        <option value="frontNine">9 front</option>
+        <option value="backNine">9 back</option>
+
+    </select></label>
+
+    <label>Tee:<select class="teeType" onchange="showTeeType(value)">
+        <option value="noneType">-</option>
+        <option value="proType">Pro</option>
+        <option value="championType">Champion</option>
+        <option value="menType">Men</option>
+        <option value="womenType">Women</option>
+
+    </select></label>
+
+    <p id="warning"><em>* Must choose a course before selecting the hole amount and tee type. To view the map of the hole click on the corresponding number.</em></p>
+    <table id="golfTable">
+
+        <tbody id="tableBody">
+        <!-- 1 -->
+        <tr>
+            <td class="width">Hole</td>
+            <td class="col2" onclick="getHoleMap(1)">1</td>
+            <td class="col3" onclick="getHoleMap(2)">2</td>
+            <td class="col4" onclick="getHoleMap(3)">3</td>
+            <td class="col5" onclick="getHoleMap(4)">4</td>
+            <td class="col6" onclick="getHoleMap(5)">5</td>
+            <td class="col7" onclick="getHoleMap(6)">6</td>
+            <td class="col8" onclick="getHoleMap(7)">7</td>
+            <td class="col9" onclick="getHoleMap(8)">8</td>
+            <td class="col10" onclick="getHoleMap(9)">9</td>
+            <td class="col11">Out</td>
+            <td class="col12" onclick="getHoleMap(10)">10</td>
+            <td class="col13" onclick="getHoleMap(11)">11</td>
+            <td class="col14" onclick="getHoleMap(12)">12</td>
+            <td class="col15" onclick="getHoleMap(13)">13</td>
+            <td class="col16" onclick="getHoleMap(14)">14</td>
+            <td class="col17" onclick="getHoleMap(15)">15</td>
+            <td class="col18" onclick="getHoleMap(16)">16</td>
+            <td class="col19" onclick="getHoleMap(17)">17</td>
+            <td class="col20" onclick="getHoleMap(18)">18</td>
+            <td class="col21">In</td>
+            <td class="col22">Tot</td>
+            <!--<td>Hcp</td>
+            <td>Net</td>-->
+        </tr>
+        <!-- 2 -->
+        <tr id="pro" class="proRow">
+            <td>Pro</td>
+            <td class="col2"></td>
+            <td class="col3"></td>
+            <td class="col4"></td>
+            <td class="col5"></td>
+            <td class="col6"></td>
+            <td class="col7"></td>
+            <td class="col8"></td>
+            <td class="col9"></td>
+            <td class="col10"></td>
+            <td class="col11"></td>
+            <td class="col12"></td>
+            <td class="col13"></td>
+            <td class="col14"></td>
+            <td class="col15"></td>
+            <td class="col16"></td>
+            <td class="col17"></td>
+            <td class="col18"></td>
+            <td class="col19"></td>
+            <td class="col20"></td>
+            <td class="col21"></td>
+            <td class="col22"></td>
+            <!-- <td></td>
+             <td></td>-->
+        </tr>
+        <!-- 2 -->
+        <tr id="proyrd" class="proYards">
+            <td>Yardage</td>
+            <td class="col2"></td>
+            <td class="col3"></td>
+            <td class="col4"></td>
+            <td class="col5"></td>
+            <td class="col6"></td>
+            <td class="col7"></td>
+            <td class="col8"></td>
+            <td class="col9"></td>
+            <td class="col10"></td>
+            <td class="col11"></td>
+            <td class="col12"></td>
+            <td class="col13"></td>
+            <td class="col14"></td>
+            <td class="col15"></td>
+            <td class="col16"></td>
+            <td class="col17"></td>
+            <td class="col18"></td>
+            <td class="col19"></td>
+            <td class="col20"></td>
+            <td class="col21"></td>
+            <td class="col22"></td>
+            <!-- <td></td>
+             <td></td>-->
+        </tr>
+
+        <tr id="proHandicap" class="proHcp">
+            <td class="width">Pro Handicap</td>
+            <td class="col2"></td>
+            <td class="col3"></td>
+            <td class="col4"></td>
+            <td class="col5"></td>
+            <td class="col6"></td>
+            <td class="col7"></td>
+            <td class="col8"></td>
+            <td class="col9"></td>
+            <td class="col10"></td>
+            <td class="col11"></td>
+            <td class="col12"></td>
+            <td class="col13"></td>
+            <td class="col14"></td>
+            <td class="col15"></td>
+            <td class="col16"></td>
+            <td class="col17"></td>
+            <td class="col18"></td>
+            <td class="col19"></td>
+            <td class="col20"></td>
+            <td class="col21"></td>
+            <td class="col22"></td>
+            <!-- <td></td>
+             <td></td> -->
+        </tr>
+        <!-- 3 -->
+        <tr id="champion" class="championRow">
+            <td class="width">Champion</td>
+            <td class="col2"></td>
+            <td class="col3"></td>
+            <td class="col4"></td>
+            <td class="col5"></td>
+            <td class="col6"></td>
+            <td class="col7"></td>
+            <td class="col8"></td>
+            <td class="col9"></td>
+            <td class="col10"></td>
+            <td class="col11"></td>
+            <td class="col12"></td>
+            <td class="col13"></td>
+            <td class="col14"></td>
+            <td class="col15"></td>
+            <td class="col16"></td>
+            <td class="col17"></td>
+            <td class="col18"></td>
+            <td class="col19"></td>
+            <td class="col20"></td>
+            <td class="col21"></td>
+            <td class="col22"></td>
+            <!--<td></td>
+            <td></td>-->
+        </tr>
+        <tr id="championyrd" class="championYards">
+            <td class="width">Yardage</td>
+            <td class="col2"></td>
+            <td class="col3"></td>
+            <td class="col4"></td>
+            <td class="col5"></td>
+            <td class="col6"></td>
+            <td class="col7"></td>
+            <td class="col8"></td>
+            <td class="col9"></td>
+            <td class="col10"></td>
+            <td class="col11"></td>
+            <td class="col12"></td>
+            <td class="col13"></td>
+            <td class="col14"></td>
+            <td class="col15"></td>
+            <td class="col16"></td>
+            <td class="col17"></td>
+            <td class="col18"></td>
+            <td class="col19"></td>
+            <td class="col20"></td>
+            <td class="col21"></td>
+            <td class="col22"></td>
+            <!--<td></td>
+            <td></td>-->
+        </tr>
+
+        <tr id="championHandicap" class="championHcp">
+            <td class="width">Champion Handicap</td>
+            <td class="col2"></td>
+            <td class="col3"></td>
+            <td class="col4"></td>
+            <td class="col5"></td>
+            <td class="col6"></td>
+            <td class="col7"></td>
+            <td class="col8"></td>
+            <td class="col9"></td>
+            <td class="col10"></td>
+            <td class="col11"></td>
+            <td class="col12"></td>
+            <td class="col13"></td>
+            <td class="col14"></td>
+            <td class="col15"></td>
+            <td class="col16"></td>
+            <td class="col17"></td>
+            <td class="col18"></td>
+            <td class="col19"></td>
+            <td class="col20"></td>
+            <td class="col21"></td>
+            <td class="col22"></td>
+            <!-- <td></td>
+             <td></td> -->
+        </tr>
+        <!-- 4 -->
+        <tr id="men" class="menRow">
+            <td class="width">Men</td>
+            <td class="col2"></td>
+            <td class="col3"></td>
+            <td class="col4"></td>
+            <td class="col5"></td>
+            <td class="col6"></td>
+            <td class="col7"></td>
+            <td class="col8"></td>
+            <td class="col9"></td>
+            <td class="col10"></td>
+            <td class="col11"></td>
+            <td class="col12"></td>
+            <td class="col13"></td>
+            <td class="col14"></td>
+            <td class="col15"></td>
+            <td class="col16"></td>
+            <td class="col17"></td>
+            <td class="col18"></td>
+            <td class="col19"></td>
+            <td class="col20"></td>
+            <td class="col21"></td>
+            <td class="col22"></td>
+            <!-- <td></td>
+             <td></td>-->
+        </tr>
+        <!-- 4 -->
+        <tr id="menyrds" class="menYards">
+            <td class="width">Yardage</td>
+            <td class="col2"></td>
+            <td class="col3"></td>
+            <td class="col4"></td>
+            <td class="col5"></td>
+            <td class="col6"></td>
+            <td class="col7"></td>
+            <td class="col8"></td>
+            <td class="col9"></td>
+            <td class="col10"></td>
+            <td class="col11"></td>
+            <td class="col12"></td>
+            <td class="col13"></td>
+            <td class="col14"></td>
+            <td class="col15"></td>
+            <td class="col16"></td>
+            <td class="col17"></td>
+            <td class="col18"></td>
+            <td class="col19"></td>
+            <td class="col20"></td>
+            <td class="col21"></td>
+            <td class="col22"></td>
+            <!-- <td></td>
+             <td></td>-->
+        </tr>
+        <!-- 6 -->
+        <tr id="menHandicap" class="menHcp">
+            <td class="width">Men's Handicap</td>
+            <td class="col2"></td>
+            <td class="col3"></td>
+            <td class="col4"></td>
+            <td class="col5"></td>
+            <td class="col6"></td>
+            <td class="col7"></td>
+            <td class="col8"></td>
+            <td class="col9"></td>
+            <td class="col10"></td>
+            <td class="col11"></td>
+            <td class="col12"></td>
+            <td class="col13"></td>
+            <td class="col14"></td>
+            <td class="col15"></td>
+            <td class="col16"></td>
+            <td class="col17"></td>
+            <td class="col18"></td>
+            <td class="col19"></td>
+            <td class="col20"></td>
+            <td class="col21"></td>
+            <td class="col22"></td>
+            <!-- <td></td>
+             <td></td> -->
+        </tr>
+
+        <!-- 13 -->
+        <tr id="women" class="womenRow">
+            <td class="width">Women</td>
+            <td class="col2"></td>
+            <td class="col3"></td>
+            <td class="col4"></td>
+            <td class="col5"></td>
+            <td class="col6"></td>
+            <td class="col7"></td>
+            <td class="col8"></td>
+            <td class="col9"></td>
+            <td class="col10"></td>
+            <td class="col11"></td>
+            <td class="col12"></td>
+            <td class="col13"></td>
+            <td class="col14"></td>
+            <td class="col15"></td>
+            <td class="col16"></td>
+            <td class="col17"></td>
+            <td class="col18"></td>
+            <td class="col19"></td>
+            <td class="col20"></td>
+            <td class="col21"></td>
+            <td class="col22"></td>
+            <!-- <td></td>
+             <td></td>-->
+        </tr>
+        <!-- 13 -->
+        <tr id="womenyrd" class="womenYards">
+            <td class="width">Yardage</td>
+            <td class="col2"></td>
+            <td class="col3"></td>
+            <td class="col4"></td>
+            <td class="col5"></td>
+            <td class="col6"></td>
+            <td class="col7"></td>
+            <td class="col8"></td>
+            <td class="col9"></td>
+            <td class="col10"></td>
+            <td class="col11"></td>
+            <td class="col12"></td>
+            <td class="col13"></td>
+            <td class="col14"></td>
+            <td class="col15"></td>
+            <td class="col16"></td>
+            <td class="col17"></td>
+            <td class="col18"></td>
+            <td class="col19"></td>
+            <td class="col20"></td>
+            <td class="col21"></td>
+            <td class="col22"></td>
+            <!-- <td></td>
+             <td></td>-->
+        </tr>
+        <!-- 15 -->
+        <tr id="womenHandicap" class="womenHcp">
+            <td class="width">Women's Handicap</td>
+            <td class="col2"></td>
+            <td class="col3"></td>
+            <td class="col4"></td>
+            <td class="col5"></td>
+            <td class="col6"></td>
+            <td class="col7"></td>
+            <td class="col8"></td>
+            <td class="col9"></td>
+            <td class="col10"></td>
+            <td class="col11"></td>
+            <td class="col12"></td>
+            <td class="col13"></td>
+            <td class="col14"></td>
+            <td class="col15"></td>
+            <td class="col16"></td>
+            <td class="col17"></td>
+            <td class="col18"></td>
+            <td class="col19"></td>
+            <td class="col20"></td>
+            <td class="col21"></td>
+            <td class="col22"></td>
+            <!-- <td></td>
+             <td></td>-->
+        </tr>
+
+        <button id="addPlayer">Add Player</button>
+        <tr class="score-row" id="nameID1">
+            <td><input class="width name_width name-entry col1" type="text" onchange="checkDuplicate()"></td>
+            <td class="col2"><input type="text" class="col2" data-player="player-1" onchange="rowTotal(this)"></td>
+            <td class="col3"><input type="text" class="col3" data-player="player-1" onchange="rowTotal(this)"></td>
+            <td class="col4"><input type="text" class="col4" data-player="player-1" onchange="rowTotal(this)"></td>
+            <td class="col5"><input type="text" class="col5" data-player="player-1" onchange="rowTotal(this)"></td>
+            <td class="col6"><input type="text" class="col6" data-player="player-1" onchange="rowTotal(this)"></td>
+            <td class="col7"><input type="text" class="col7" data-player="player-1" onchange="rowTotal(this)"></td>
+            <td class="col8"><input type="text" class="col8" data-player="player-1" onchange="rowTotal(this)"></td>
+            <td class="col9"><input type="text" class="col9" data-player="player-1" onchange="rowTotal(this)"></td>
+            <td class="col10"><input type="text" class="col10" data-player="player-1" onchange="rowTotal(this)"></td>
+            <td class="col11"><input type="text"  class="col11" disabled="disabled"></td>
+            <td class="col12"><input type="text" class="col12" data-player="player-1" onchange="rowTotal(this)"></td>
+            <td class="col13"><input type="text" class="col13" data-player="player-1" onchange="rowTotal(this)"></td>
+            <td class="col14"><input type="text" class="col14" data-player="player-1" onchange="rowTotal(this)"></td>
+            <td class="col15"><input type="text" class="col15" data-player="player-1" onchange="rowTotal(this)"></td>
+            <td class="col16"><input type="text" class="col16" data-player="player-1" onchange="rowTotal(this)"></td>
+            <td class="col17"><input type="text" class="col17" data-player="player-1" onchange="rowTotal(this)"></td>
+            <td class="col18"><input type="text" class="col18" data-player="player-1" onchange="rowTotal(this)"></td>
+            <td class="col19"><input type="text" class="col19" data-player="player-1" onchange="rowTotal(this)"></td>
+            <td class="col20"><input type="text" class="col20" data-player="player-1" onchange="rowTotal(this)"></td>
+            <td class="col21"><input type="text"  class="col21" disabled="disabled"></td>
+            <td class="col22"><input type="text" class="col22" disabled="disabled"></td>
+            <!-- <td></td>
+             <td></td>-->
+        </tr>
+        <script type="text/javascript" src="math.js"></script>
+        <script type="text/javascript" src="course-service.js"></script>
+        <script type="text/javascript" src="main.js"></script>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVTsmhQ8Pt10QVxUo2lNRhlCevPSCkWaQ&callback=initMap"></script>
+        </tbody>
+    </table>
+</div>
+<div id="map"></div>
+</body>
+</html>
